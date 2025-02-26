@@ -1,6 +1,6 @@
-import React, {useRef, useState} from 'react';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import React, { useRef, useState } from 'react';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   StyleSheet,
   TextInput,
@@ -9,10 +9,10 @@ import {
   Text,
   View,
 } from 'react-native';
-import {scale} from 'react-native-size-matters';
+import { scale } from 'react-native-size-matters';
 import PropTypes from 'prop-types';
 
-const Search = ({items, onSearchSelect, placeholder}) => {
+const Search = (props) => {
   const [search, setSearch] = useState('');
   const [filteredItems, setFilteredItems] = useState([]);
   const textInputRef = useRef(null);
@@ -21,23 +21,23 @@ const Search = ({items, onSearchSelect, placeholder}) => {
     textInputRef.current.focus();
   };
 
-  const handleSearch = value => {
+  const handleSearch = (value) => {
     setSearch(value);
 
     if (value.trim() === '') {
       setFilteredItems([]);
     } else {
-      const matchedItems = items.filter(item =>
-        item.name.toLowerCase().includes(value.toLowerCase()),
+      const matchedItems = props.items.filter((item) =>  //props.item:donations
+        item.name.toLowerCase().includes(value.toLowerCase())
       );
       setFilteredItems(matchedItems);
     }
   };
 
-  const handleSelect = item => {
-    setSearch(''); // 清空搜索框
-    setFilteredItems([]); // 清空結果
-    onSearchSelect(item); // 回傳選中的 item
+  const handleSelect = (item) => {
+    setSearch(''); 
+    setFilteredItems([]); 
+    props.onSearchSelect(item); 
   };
 
   return (
@@ -45,7 +45,7 @@ const Search = ({items, onSearchSelect, placeholder}) => {
       <Pressable style={styles.searchInputContainer} onPress={handleFocus}>
         <FontAwesomeIcon icon={faSearch} color={'#25C0FF'} size={scale(22)} />
         <TextInput
-          placeholder={placeholder}
+          placeholder={props.placeholder}
           ref={textInputRef}
           style={styles.searchInput}
           value={search}
@@ -56,12 +56,13 @@ const Search = ({items, onSearchSelect, placeholder}) => {
       {filteredItems.length > 0 && (
         <FlatList
           data={filteredItems}
-          keyExtractor={item => item.donationItemId.toString()}
+          keyExtractor={(item) => item.donationItemId.toString()}
           style={styles.resultList}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <Pressable
               style={styles.resultItem}
-              onPress={() => handleSelect(item)}>
+              onPress={() => handleSelect(item)} //navigate to donation page
+            >
               <Text style={styles.resultText}>{item.name}</Text>
             </Pressable>
           )}
@@ -118,3 +119,4 @@ const styles = StyleSheet.create({
 });
 
 export default Search;
+
