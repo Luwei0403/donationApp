@@ -11,7 +11,7 @@ CharityApp 是一款 **模擬慈善義賣的跨平台 App**，使用 **React Nat
 - 導航**：React Navigation 
 - 數據存儲**：Firebase Firestore
 - 後端 API 串接**：使用 Firebase 
--
+
 
 ---
 
