@@ -7,7 +7,7 @@ CharityApp 是一款 **模擬慈善義賣的跨平台 App**，使用 **React Nat
 ##  技術棧（Tech Stack）
 - 前端框架**：React Native（基於 Function Component）
 - 狀態管理**：Redux Toolkit（更簡潔且效能更佳）
-- UI/動畫**：React Native Elements、Fontawesome
+- UI/動畫**：Figma、React Native Elements、Fontawesome
 - 導航**：React Navigation 
 - 數據存儲**：Firebase Firestore
 - 後端 API 串接**：使用 Firebase 
